@@ -1,19 +1,12 @@
-import { SetStateAction, useState } from "react";
+import { useState } from "react";
 
-
-interface CalculatorProps {
-  onClick: (ev: React.MouseEvent<HTMLButtonElement>) => void;
-  digito: number;
-
-}
-
-export default function App({ onClick }: CalculatorProps) {
+export default function App() {
   const [input, setInput] = useState("0");
   const [secondInput, setSecondInput] = useState("0");
   const [math, setMath] = useState("");
 
-  const addNumber = (digito: any) => {
-    if (input === "0" || secondInput === "0") {
+  const addNumber = (digito: string) => {
+    if (input === "0") {
       return (
         setInput(digito)
       )
@@ -48,7 +41,6 @@ export default function App({ onClick }: CalculatorProps) {
     )
   }
 
-
   const invert = () => {
     return (
       setInput((Number(input) * (-1)).toString())
@@ -63,8 +55,6 @@ export default function App({ onClick }: CalculatorProps) {
     )
   }
 
-
-
   const decimal = () => {
     if (input.toString().includes(".")) {
       return
@@ -74,9 +64,9 @@ export default function App({ onClick }: CalculatorProps) {
     }
   }
 
-  console.log(`${input} input`)
-  console.log(`${secondInput} secinput`)
-
+  console.log(math)
+  console.log(input)
+  console.log(secondInput)
 
   return (
     <div className="App">
@@ -88,25 +78,25 @@ export default function App({ onClick }: CalculatorProps) {
         <button className="orange" onClick={() => operator("/")}>÷</button>
       </div>
       <div className="row">
-        <button onClick={() => addNumber(7)}>7</button>
-        <button onClick={() => addNumber(8)}>8</button>
-        <button onClick={() => addNumber(9)}>9</button>
+        <button onClick={() => addNumber("7")}>7</button>
+        <button onClick={() => addNumber("8")}>8</button>
+        <button onClick={() => addNumber("9")}>9</button>
         <button className="orange" onClick={() => operator("*")}>x</button>
       </div>
       <div className="row">
-        <button onClick={() => addNumber(4)}>4</button>
-        <button onClick={() => addNumber(5)}>5</button>
-        <button onClick={() => addNumber(6)}>6</button>
+        <button onClick={() => addNumber("4")}>4</button>
+        <button onClick={() => addNumber("5")}>5</button>
+        <button onClick={() => addNumber("6")}>6</button>
         <button className="orange" onClick={() => operator("-")}>-</button>
       </div>
       <div className="row">
-        <button onClick={() => addNumber(1)}>1</button>
-        <button onClick={() => addNumber(2)}>2</button>
-        <button onClick={() => addNumber(3)}>3</button>
+        <button onClick={() => addNumber("1")}>1</button>
+        <button onClick={() => addNumber("2")}>2</button>
+        <button onClick={() => addNumber("3")}>3</button>
         <button className="orange" onClick={() => operator("+")}>+</button>
       </div>
       <div className="row">
-        <button className="zero" onClick={() => addNumber(0)}>0</button>
+        <button className="zero" onClick={() => addNumber("0")}>0</button>
         <button onClick={() => decimal()}>.</button>
         <button className="orange" onClick={() => equal(math)}>=</button>
       </div>
