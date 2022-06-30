@@ -81,7 +81,7 @@ export default function App() {
 
   return (
     <div className="App">
-      <div className="display">{input.length > 9 ? Number(input).toPrecision(6) : (secondInput !== "0" && input === "0") ? Number(secondInput).toLocaleString('en-US') : Number(input).toLocaleString('en-US')}</div>
+      <div className="display">{input.length > 10 ? (Number(input).toPrecision(6)).toString() : (secondInput !== "0" && input === "0") ? secondInput : input}</div>
       <div className="row">
         <button className="grey" onClick={() => clear()}>AC</button>
         <button className="grey" onClick={() => invert()}>+/-</button>
