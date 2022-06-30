@@ -6,7 +6,10 @@ export default function App() {
   const [math, setMath] = useState("");
 
   const addNumber = (digito: string) => {
-    if (input === "0") {
+    if ((!input.includes(".") && input.length > 8) || (input.includes(".") && input.length > 9)) {
+      return
+    }
+    else if (input === "0") {
       return (
         setInput(digito)
       )
@@ -28,10 +31,22 @@ export default function App() {
 
   function equal(math: string) {
     switch (math) {
-      case "+": return setInput((Number(secondInput) + Number(input)).toString())
-      case "-": return setInput((Number(secondInput) - Number(input)).toString())
-      case "*": return setInput((Number(input) * Number(secondInput)).toString())
-      case "/": return setInput((Number(secondInput) / Number(input)).toString())
+      case "+":
+        setInput((Number(secondInput) + Number(input)).toString())
+        setSecondInput("0")
+        break;
+      case "-":
+        setInput((Number(secondInput) - Number(input)).toString())
+        setSecondInput("0")
+        break;
+      case "*":
+        setInput((Number(secondInput) * Number(input)).toString())
+        setSecondInput("0")
+        break;
+      case "/":
+        setInput((Number(secondInput) / Number(input)).toString())
+        setSecondInput("0")
+        break;
     }
   }
 
@@ -64,13 +79,9 @@ export default function App() {
     }
   }
 
-  console.log(math)
-  console.log(input)
-  console.log(secondInput)
-
   return (
     <div className="App">
-      <div className="display">{input}</div>
+      <div className="display">{input.length > 9 ? Number(input).toPrecision(6) : (secondInput !== "0" && input === "0") ? Number(secondInput).toLocaleString('en-US') : Number(input).toLocaleString('en-US')}</div>
       <div className="row">
         <button className="grey" onClick={() => clear()}>AC</button>
         <button className="grey" onClick={() => invert()}>+/-</button>
